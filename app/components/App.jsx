@@ -1,4 +1,5 @@
 import React from 'react';
+import Game from "./Game.jsx";
 
 require('./App.css');
 
@@ -10,7 +11,7 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <h1>Hello World</h1>
+            <Game></Game>
         );
     }
 }
