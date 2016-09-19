@@ -1,0 +1,46 @@
+{
+  "name": "gesture-game",
+  "version": "1.0.0",
+  "description": "A gesture game realized by canvas with algorithm $P.",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --devtool eval --progress --hot --content-base app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CompileYouth/gesture-game.git"
+  },
+  "keywords": [
+    "Canvas",
+    "Game",
+    "$P",
+    "dollarP"
+  ],
+  "author": "CompileYouth <CompileYouth@163.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CompileYouth/gesture-game/issues"
+  },
+  "homepage": "https://github.com/CompileYouth/gesture-game#readme",
+  "dependencies": {
+    "babel-runtime": "^6.11.6",
+    "react": "^15.3.1",
+    "react-dom": "^15.3.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.14.0",
+    "babel-loader": "^6.2.5",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "css-loader": "^0.25.0",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
+    "open-browser-webpack-plugin": "0.0.2",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.1"
+  }
+}
