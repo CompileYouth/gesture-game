@@ -113,7 +113,7 @@ export default class Game extends React.Component {
     checkResult(result) {
         if (result.Name === this.state.currentSymbol) {
             this.setState({
-                currentSymbol: "Nice"
+                currentSymbol: "Nice!"
             });
 
             this.setState({
@@ -122,24 +122,24 @@ export default class Game extends React.Component {
         }
         else {
             this.setState({
-                currentSymbol: "Sad"
+                currentSymbol: "Sad!"
             });
         }
 
         setTimeout(() => {
             this.generateSymbol();
-        }, 1500);
+        }, 1000);
     }
 
     render() {
         return (
             <div>
-                { this.state.showStarter ? <div id="game-starter">{ this.state.starter }</div> : null }
                 <div id="game-header">
                     <div id="pre" onClick = { this.props.onClick }></div>
                     <div id="bar">{ this.state.currentSymbol }</div>
                     <div id="score">{ this.state.score }</div>
                 </div>
+                { this.state.showStarter ? <div id="game-starter">{ this.state.starter }</div> : null }
                 <canvas id="game-canvas" ref="gameCanvas"
                     onMouseDown = { this.gameCanvasMouseDown.bind(this) }
                     onMouseMove = { this.gameCanvasMouseMove.bind(this) }
