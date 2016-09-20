@@ -1,5 +1,6 @@
 import React from 'react';
 
+const pDollarRecognizer = require('./PDollarRecognizerSinglton.js').pDollarRecognizer;
 const pd = require('./pdollar.js');
 require('./Game.css');
 
@@ -21,8 +22,6 @@ export default class Game extends React.Component {
     }
 
     componentDidMount() {
-        this.pDollarRecognizer = new pd.PDollarRecognizer();
-
         this.gameCanvas = document.getElementById('game-canvas');
         this.ctx = this.gameCanvas.getContext('2d');
 
@@ -79,7 +78,7 @@ export default class Game extends React.Component {
 
         if (!this._timer) {
             this._timer = setTimeout(() => {
-                const result = this.pDollarRecognizer.Recognize(this._points);
+                const result = pDollarRecognizer.Recognize(this._points);
                 console.log(result);
                 this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
             }, 1000);
@@ -95,7 +94,7 @@ export default class Game extends React.Component {
     }
 
     beginGame() {
-        
+
     }
 
     render() {

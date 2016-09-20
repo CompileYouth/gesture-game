@@ -20,6 +20,7 @@ export default class App extends React.Component {
             "train-gesture": "train",
             "about-author": "about"
         };
+
     }
 
     handleMainClick(e) {
@@ -54,7 +55,7 @@ export default class App extends React.Component {
         return (
             <div>
                 { this.state.currentPage === "main" ? <Main onClick = { this.handleMainClick.bind(this) }></Main> : null }
-                { this.state.currentPage === "game" ? <Game onClick = { this.handleGameClick.bind(this) }></Game> : null }
+                { this.state.currentPage === "game" ? <Game onClick = { this.handleGameClick.bind(this) } ></Game> : null }
                 { this.state.currentPage === "train" ? <Train onClick = { this.handleTrainClick.bind(this) }></Train> : null }
                 { this.state.currentPage === "about" ? <About onClick = { this.handleAboutClick.bind(this) }></About> : null }
             </div>
