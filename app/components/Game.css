@@ -1,0 +1,55 @@
+#game-starter {
+    position: absolute;
+    top: 0px;
+    height: 700px;
+    width: 400px;
+
+    line-height: 620px;
+    text-align: center;
+    font-size: 60px;
+}
+
+#game-header {
+    position: absolute;
+    width: 100%;
+    height: 80px;
+    border-bottom: 2px solid #333;
+}
+
+#game-header > #pre {
+    float: left;
+    height: 80px;
+    width: 80px;
+    background-image: url(../images/pre.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#game-header > #bar {
+    float: left;
+    margin-left: 20px;
+    height: 80px;
+    width: 200px;
+    background-image: url(../images/score.png);
+    background-size: 100% 80px;
+    background-repeat: no-repeat;
+    text-align: center;
+    line-height: 80px;
+    font-size: 55px;
+}
+
+#game-header > #score {
+    float: right;
+    height: 80px;
+    width: 80px;
+    background-image: url(../images/score.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    text-align: center;
+    line-height: 80px;
+    font-size: 32px;
+}
+
+#game-canvas {
+    display: block;
+}
