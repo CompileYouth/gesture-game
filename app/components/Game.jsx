@@ -7,6 +7,13 @@ export default class Game extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            currentSymbol: null,
+            score: 0,
+            showStarter: true,
+            starter: 3
+        }
+
         this._isDown = false;
         this._strokeID = 0; // stroke's number
         this._points = new Array();
@@ -23,6 +30,20 @@ export default class Game extends React.Component {
         this.ctx.canvas.height = window.innerHeight;
         this.ctx.fillStyle = "rgba(0, 0, 0, 0)";
         this.ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+
+        setTimeout(() => {
+            this.setState({starter: 2});
+            setTimeout(() => {
+                this.setState({starter: 1});
+                setTimeout(() => {
+                    this.setState({starter: "开始游戏"});
+                    setTimeout(() => {
+                        this.setState({showStarter: false});
+                        this.beginGame();
+                    }, 1000);
+                }, 1000);
+            }, 1000);
+        }, 1000);
     }
 
     gameCanvasMouseDown(e) {
@@ -73,13 +94,25 @@ export default class Game extends React.Component {
         this.ctx.stroke();
     }
 
+    beginGame() {
+        
+    }
+
     render() {
         return (
-            <canvas id="game-canvas" ref="gameCanvas"
-                onMouseDown = { this.gameCanvasMouseDown.bind(this) }
-                onMouseMove = { this.gameCanvasMouseMove.bind(this) }
-                onMouseUp = { this.gameCanvasMouseUp.bind(this) }></canvas>
-        );
+            <div>
+                { this.state.showStarter ? <div id="game-starter">{ this.state.starter }</div> : null }
+                <div id="game-header">
+                    <div id="pre" onClick = { this.props.onClick }></div>
+                    <div id="bar">{ this.state.currentSymbol }</div>
+                    <div id="score">{ this.state.score }</div>
+                </div>
+                <canvas id="game-canvas" ref="gameCanvas"
+                    onMouseDown = { this.gameCanvasMouseDown.bind(this) }
+                    onMouseMove = { this.gameCanvasMouseMove.bind(this) }
+                    onMouseUp = { this.gameCanvasMouseUp.bind(this) }></canvas>
+            </div>
+    );
     }
 }
 

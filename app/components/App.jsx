@@ -1,9 +1,9 @@
 import React from 'react';
 import Game from "./Game.jsx";
 import Main from "./Main.jsx";
+import About from "./About.jsx";
 
 require('./App.css');
-
 
 export default class App extends React.Component {
     constructor(props) {
@@ -31,11 +31,24 @@ export default class App extends React.Component {
         }
     }
 
+    handleGameClick(e) {
+        this.setState({
+            currentPage: "main"
+        });
+    }
+
+    handleAboutClick(e) {
+        this.setState({
+            currentPage: "main"
+        });
+    }
+
     render() {
         return (
             <div>
-                { this.state.currentPage === "main" ? <Main onClick = { this.handleMainClick.bind(this) } ref = "main"></Main> : null }
-                { this.state.currentPage === "game" ? <Game></Game> : null }
+                { this.state.currentPage === "main" ? <Main onClick = { this.handleMainClick.bind(this) }></Main> : null }
+                { this.state.currentPage === "game" ? <Game onClick = { this.handleGameClick.bind(this) }></Game> : null }
+                { this.state.currentPage === "about" ? <About onClick = { this.handleAboutClick.bind(this) }></About> : null }
             </div>
         );
     }
