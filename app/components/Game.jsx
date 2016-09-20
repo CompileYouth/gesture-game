@@ -21,7 +21,7 @@ export default class Game extends React.Component {
 
         this.ctx.canvas.width = window.innerWidth;
         this.ctx.canvas.height = window.innerHeight;
-        this.ctx.fillStyle = "rgba(0,0, 0, 0.8)";
+        this.ctx.fillStyle = "rgba(0, 0, 0, 0)";
         this.ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
     }
 
@@ -36,7 +36,7 @@ export default class Game extends React.Component {
         const x = e.clientX;
         const y = e.clientY;
         this._points[this._points.length] = new pd.Point(x, y, ++this._strokeID);
-        const clr = "rgb(" + rand(0,200) + "," + rand(0,200) + "," + rand(0,200) + ")";
+        const clr = "rgb(" + rand(0,100) + "," + rand(0,100) + "," + rand(0,100) + ")";
         this.ctx.strokeStyle = clr;
         this.ctx.fillStyle = clr;
         this.ctx.fillRect(x - 4, y - 3, 9, 9);
@@ -60,6 +60,7 @@ export default class Game extends React.Component {
             this._timer = setTimeout(() => {
                 const result = this.pDollarRecognizer.Recognize(this._points);
                 console.log(result);
+                this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
             }, 1000);
         }
     }
