@@ -90,6 +90,7 @@ function Result(name, score) // constructor
 var NumPointClouds = 16;
 var NumPoints = 32;
 var Origin = new Point(0,0,0);
+
 //
 // PDollarRecognizer class
 //
@@ -173,7 +174,6 @@ function PDollarRecognizer() // constructor
 		points = Resample(points, NumPoints);
 		points = Scale(points);
 		points = TranslateTo(points, Origin);
-
 		var b = +Infinity;
 		var u = -1;
 		for (var i = 0; i < this.PointClouds.length; i++) // for each point-cloud template
@@ -334,7 +334,6 @@ function Distance(p1, p2) // Euclidean distance between two points
 	var dy = p2.Y - p1.Y;
 	return Math.sqrt(dx * dx + dy * dy);
 }
-
 
 module.exports = {
 	Point: Point,

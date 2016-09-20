@@ -48,9 +48,6 @@ export default class Train extends React.Component {
         if (this._isDown) {
             this._isDown = false;
         }
-
-        const result = pDollarRecognizer.Recognize(this._points);
-        console.log(result);
     }
 
     drawConnectedPoint(from, to) {
@@ -66,13 +63,16 @@ export default class Train extends React.Component {
     }
 
     addBtnClick(e) {
-        console.log("add");
         const name = this.refs.gestureName.value;
         if (this._points.length >= 10 && name.length > 0) {
-            const num = pDollarRecognizer.AddGesture(name, this._points);
-        }
+            console.log("Add");
+            pDollarRecognizer.AddGesture(name, this._points);
 
-        this.refs.gestureName.value = "";
+            window.allSymbols.push(name);
+            this._points = [];
+            this.refs.gestureName.value = "";
+            this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        }
     }
 
     render() {

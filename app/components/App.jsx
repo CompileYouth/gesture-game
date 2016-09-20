@@ -10,13 +10,13 @@ export default class App extends React.Component {
     constructor(props) {
         super(props);
 
+        window.allSymbols = [ "N", "P", "X", "H", "line" ];
         this.state = {
             currentPage: "main"
         };
 
         this._pages = {
             "play-game": "game",
-            "select-gesture": "select",
             "train-gesture": "train",
             "about-author": "about"
         };
@@ -27,10 +27,6 @@ export default class App extends React.Component {
         this.setState({
             currentPage: this._pages[e.target.id]
         });
-
-        if (this._pages[e.target.id] === "game") {
-
-        }
     }
 
     handleGameClick(e) {

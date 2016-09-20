@@ -80,6 +80,9 @@ export default class Game extends React.Component {
             this._timer = setTimeout(() => {
                 const result = pDollarRecognizer.Recognize(this._points);
                 console.log(result);
+                this.checkResult(result);
+
+                this._points = [];
                 this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
             }, 1000);
         }
@@ -94,7 +97,38 @@ export default class Game extends React.Component {
     }
 
     beginGame() {
+        this.generateSymbol();
+    }
 
+    generateSymbol() {
+        const allSymbols = window.allSymbols;
+        const index = Number.parseInt(Math.random() * allSymbols.length);
+        const symbol = allSymbols[index];
+
+        this.setState({
+            currentSymbol: symbol
+        });
+    }
+
+    checkResult(result) {
+        if (result.Name === this.state.currentSymbol) {
+            this.setState({
+                currentSymbol: "Nice"
+            });
+
+            this.setState({
+                score: this.state.score + 1
+            });
+        }
+        else {
+            this.setState({
+                currentSymbol: "Sad"
+            });
+        }
+
+        setTimeout(() => {
+            this.generateSymbol();
+        }, 1500);
     }
 
     render() {
