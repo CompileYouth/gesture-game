@@ -4,7 +4,8 @@ import App from './components/App.jsx';
 
 const app = document.createElement('div');
 app.setAttribute("id", "app");
+
 ReactDOM.render(
-  <App />,
-  document.body.appendChild(app)
+    <App />,
+    document.body.appendChild(app)
 );
