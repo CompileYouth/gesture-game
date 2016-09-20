@@ -1,6 +1,6 @@
 import React from 'react';
 
-require('./pdollar.js');
+const pd = require('./pdollar.js');
 require('./Game.css');
 
 export default class Game extends React.Component {
@@ -10,21 +10,32 @@ export default class Game extends React.Component {
         this._isDown = false;
         this._strokeID = 0; // stroke's number
         this._points = new Array();
+        this._timer = null;
     }
 
     componentDidMount() {
+        this.pDollarRecognizer = new pd.PDollarRecognizer();
+
         this.gameCanvas = document.getElementById('game-canvas');
         this.ctx = this.gameCanvas.getContext('2d');
-        this.ctx.fillStyle = "rgba(255,0, 0, 0.5)";
+
+        this.ctx.canvas.width = window.innerWidth;
+        this.ctx.canvas.height = window.innerHeight;
+        this.ctx.fillStyle = "rgba(0,0, 0, 0.8)";
         this.ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
     }
 
     gameCanvasMouseDown(e) {
-        console.log("down");
         this._isDown = true;
+
+        if (this._timer) {
+            clearTimeout(this._timer);
+            this._timer = null;
+        }
+
         const x = e.clientX;
         const y = e.clientY;
-        // this._points[this._points.length] = new Point(x, y, ++this._strokeID);
+        this._points[this._points.length] = new pd.Point(x, y, ++this._strokeID);
         const clr = "rgb(" + rand(0,200) + "," + rand(0,200) + "," + rand(0,200) + ")";
         this.ctx.strokeStyle = clr;
         this.ctx.fillStyle = clr;
@@ -32,17 +43,25 @@ export default class Game extends React.Component {
     }
 
     gameCanvasMouseMove(e) {
-        console.log("move");
-        if (_isDown) {
+        if (this._isDown) {
             const x = e.clientX;
             const y = e.clientY;
-            this._points[this._points.length] = new Point(x, y, this._strokeID); // append
+            this._points[this._points.length] = new pd.Point(x, y, this._strokeID); // append
             this.drawConnectedPoint(this._points.length - 2, this._points.length - 1);
         }
     }
 
     gameCanvasMouseUp(e) {
-        console.log("up");
+        if (this._isDown) {
+            this._isDown = false;
+        }
+
+        if (!this._timer) {
+            this._timer = setTimeout(() => {
+                const result = this.pDollarRecognizer.Recognize(this._points);
+                console.log(result);
+            }, 1000);
+        }
     }
 
     drawConnectedPoint(from, to) {
