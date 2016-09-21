@@ -2,6 +2,8 @@ import React from 'react';
 
 const pDollarRecognizer = require('./PDollarRecognizerSinglton.js').pDollarRecognizer;
 const pd = require("./pdollar.js");
+const Hammer = require('react-hammerjs');
+
 require('./Train.css');
 
 export default class Train extends React.Component {
@@ -24,6 +26,7 @@ export default class Train extends React.Component {
     }
 
     trainCanvasMouseDown(e) {
+        console.log("down");
         this._isDown = true;
 
         const x = e.clientX;
@@ -36,6 +39,7 @@ export default class Train extends React.Component {
     }
 
     trainCanvasMouseMove(e) {
+        console.log("move");
         if (this._isDown) {
             const x = e.clientX;
             const y = e.clientY;
@@ -45,12 +49,14 @@ export default class Train extends React.Component {
     }
 
     trainCanvasMouseUp(e) {
+        console.log("up");
         if (this._isDown) {
             this._isDown = false;
         }
     }
 
     drawConnectedPoint(from, to) {
+
         this.ctx.beginPath();
         this.ctx.moveTo(this._points[from].X, this._points[from].Y);
         this.ctx.lineTo(this._points[to].X, this._points[to].Y);
@@ -75,6 +81,16 @@ export default class Train extends React.Component {
         }
     }
 
+    handlePanStart(e) {
+        console.log("panStart");
+    }
+    handlePan(e) {
+        console.log("pan");
+    }
+    handlePanEnd(e) {
+        console.log("panEnd");
+    }
+
     render() {
         return (
             <div>
@@ -84,10 +100,21 @@ export default class Train extends React.Component {
                     <button onClick = { this.clearBtnClick.bind(this) }>清除</button>
                     <button onClick = { this.addBtnClick.bind(this) }>添加</button>
                 </div>
-                <canvas id="train-canvas" ref="trainCanvas"
-                    onMouseDown = { this.trainCanvasMouseDown.bind(this) }
-                    onMouseMove = { this.trainCanvasMouseMove.bind(this) }
-                    onMouseUp = { this.trainCanvasMouseUp.bind(this) }></canvas>
+                <Hammer
+                    onPanStart={ this.trainCanvasMouseDown.bind(this) }
+                    onPan={ this.trainCanvasMouseMove.bind(this) }
+                    onPanEnd={ this.trainCanvasMouseUp.bind(this)}
+                    options={{
+                       recognizers: {
+                          pan: { enable: true }
+                       }
+                    }}>
+                    <canvas id="train-canvas" ref="trainCanvas"
+                        onMouseDown = { this.trainCanvasMouseDown.bind(this) }
+                        onMouseMove = { this.trainCanvasMouseMove.bind(this) }
+                        onMouseUp = { this.trainCanvasMouseUp.bind(this) }></canvas>
+                </Hammer>
+
             </div>
         );
     }
