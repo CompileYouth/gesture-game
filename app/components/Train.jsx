@@ -100,7 +100,7 @@ export default class Train extends React.Component {
                     <button onClick = { this.clearBtnClick.bind(this) }>清除</button>
                     <button onClick = { this.addBtnClick.bind(this) }>添加</button>
                 </div>
-                <Hammer
+                {/* <Hammer
                     onPanStart={ this.trainCanvasMouseDown.bind(this) }
                     onPan={ this.trainCanvasMouseMove.bind(this) }
                     onPanEnd={ this.trainCanvasMouseUp.bind(this)}
@@ -108,12 +108,12 @@ export default class Train extends React.Component {
                        recognizers: {
                           pan: { enable: true }
                        }
-                    }}>
+                    }}> */}
                     <canvas id="train-canvas" ref="trainCanvas"
                         onMouseDown = { this.trainCanvasMouseDown.bind(this) }
                         onMouseMove = { this.trainCanvasMouseMove.bind(this) }
                         onMouseUp = { this.trainCanvasMouseUp.bind(this) }></canvas>
-                </Hammer>
+                {/* </Hammer> */}
 
             </div>
         );
